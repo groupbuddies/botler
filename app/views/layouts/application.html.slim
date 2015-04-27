@@ -8,8 +8,8 @@ html
 
   body
 
-  - flash.each do |type, msg|
-    p
-      | #{type}: #{msg}
+  = render '/shared/navbar'
+
+  = render '/shared/flash'
 
   == yield
