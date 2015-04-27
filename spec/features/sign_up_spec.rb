@@ -12,6 +12,7 @@ RSpec.feature 'sign up' do
     click_on 'Sign up'
 
     expect(current_path).to eq root_path
+    expect(page).to have_text 'Welcome! You have signed up successfully'
   end
 
   scenario 'with invalid data' do
