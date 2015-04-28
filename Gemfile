@@ -28,8 +28,9 @@ gem 'turbolinks'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'slim-rails'
+gem 'cancancan', '~> 1.10'
 gem 'devise'
+gem 'slim-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
