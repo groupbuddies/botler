@@ -19,4 +19,13 @@ FactoryGirl.define do
     date { DateTime.now }
     user
   end
+
+  factory :periodic_expense do
+    name 'Github'
+    amount 25
+    period 'Monthly'
+    start_date { DateTime.now }
+    end_date { DateTime.now + 5.months }
+    user
+  end
 end
