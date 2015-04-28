@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe ExpensesController, type: :controller do
+  before(:each) do
+    sign_in create(:user)
+  end
+
   context 'POST /expenses' do
     context 'when all fields are valid' do
       it 'redirects to expenses#index' do
