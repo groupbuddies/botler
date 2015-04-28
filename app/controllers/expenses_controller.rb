@@ -1,4 +1,6 @@
 class ExpensesController < ApplicationController
+  authorize_resource
+
   def index
     @expenses = Expense.all
   end
