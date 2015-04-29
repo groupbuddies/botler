@@ -31,6 +31,7 @@ gem 'turbolinks'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'slim-rails'
+gem 'whenever'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,4 +52,6 @@ group :test do
 
   gem 'capybara'
   gem 'capybara-webkit'
+
+  gem 'timecop', '~> 0.7.3'
 end
