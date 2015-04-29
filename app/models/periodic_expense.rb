@@ -5,46 +5,33 @@ class PeriodicExpense < ActiveRecord::Base
 
   validates :name, :user, :amount, :period, :start_date, presence: true
   validates :period, inclusion: { in: PERIODS.keys }
-  validate :end_date_is_after_start_date
-  validate :last_paid_at_is_between_start_and_end_dates
+  validates_date :end_date, after: :start_date, if: :end_date
+  validates_date :last_paid_on, after: :start_date, if: :last_paid_on
+  validates_date :last_paid_on, before: :end_date, if: [:last_paid_on, :end_date]
 
-  def period_as_time
-    PERIODS[period]
+  scope :current, -> { where('start_date <= :today AND (end_date IS NULL OR end_date > :today)', today: Date.today) }
+
+  def due?
+    !next_pay_on.future? && (end_date.nil? || end_date > Date.today)
   end
 
-  def ready_to_pay?
-    !next_pay.future?
+  def at_beginning_of_period(date)
+    if period == 'weekly'
+      date.at_beginning_of_week
+    elsif period == 'monthly'
+      date.at_beginning_of_month
+    end
   end
 
   private
 
-  def end_date_is_after_start_date
-    return if end_date.blank? || end_date > start_date
-
-    errors.add(:end_date, 'cannot be before start date')
-  end
-
-  def last_paid_at_is_between_start_and_end_dates
-    return if last_paid_at.blank? || between_start_and_end_dates?
-
-    errors.add(:end_date, 'cannot be before start date')
-  end
-
-  def between_start_and_end_dates?
-    last_paid_at > start_date && (end_date.blank? || last_paid_at < end_date)
-  end
-
-  def next_pay
-    last_pay = last_paid_at
+  def next_pay_on
+    last_pay = last_paid_on
 
     if last_pay.nil?
-      if period == 'weekly'
-        last_pay = start_date.beginning_of_week
-      elsif period == 'monthly'
-        last_pay = start_date.beginning_of_month
-      end
+      last_pay = at_beginning_of_period(start_date)
     end
 
-    last_pay + period_as_time
+    last_pay + PERIODS[period]
   end
 end

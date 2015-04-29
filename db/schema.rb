@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429111605) do
+ActiveRecord::Schema.define(version: 20150430100801) do
 
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150429111605) do
     t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "last_paid_at"
+    t.date     "last_paid_on"
   end
 
   create_table "users", force: :cascade do |t|

@@ -31,6 +31,7 @@ gem 'turbolinks'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'slim-rails'
+gem 'validates_timeliness', '~> 3.0'
 gem 'whenever'
 
 group :development, :test do
