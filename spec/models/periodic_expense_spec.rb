@@ -80,7 +80,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.due?).to be true
+          expect(periodic_expense).to be_due
         end
       end
 
@@ -92,7 +92,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.due?).to be false
+          expect(periodic_expense).not_to be_due
         end
       end
     end
@@ -106,7 +106,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.due?).to be true
+          expect(periodic_expense).to be_due
         end
       end
 
@@ -118,7 +118,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.due?).to be false
+          expect(periodic_expense).not_to be_due
         end
       end
     end

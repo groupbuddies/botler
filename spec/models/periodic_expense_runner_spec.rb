@@ -26,11 +26,11 @@ describe PeriodicExpenseRunner, type: :model do
 
   context '#run' do
     it 'calls run_for_periodic_expense for each periodic expense' do
-      allow(PeriodicExpense).to receive(:current).and_return([1, 2, 3])
+      periodic_expense = instance_double('PeriodicExpense')
+      allow(PeriodicExpense).to receive(:current).and_return([periodic_expense, periodic_expense])
 
-      expect(runner).to receive(:run_for_periodic_expense).with(1)
-      expect(runner).to receive(:run_for_periodic_expense).with(2)
-      expect(runner).to receive(:run_for_periodic_expense).with(3)
+      expect(runner).to receive(:run_for_periodic_expense).with(periodic_expense)
+      expect(runner).to receive(:run_for_periodic_expense).with(periodic_expense)
 
       runner.run
     end
