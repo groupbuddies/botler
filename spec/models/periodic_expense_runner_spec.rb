@@ -7,10 +7,11 @@ describe PeriodicExpenseRunner, type: :model do
     context 'with a periodic expense' do
       context 'that is ready to pay' do
         it 'creates an expense' do
-          last_paid_on = Date.new(2015, 2, 1)
-          periodic_expense = create(:periodic_expense, start_date: last_paid_on.prev_month, period: 'monthly', last_paid_on: last_paid_on)
-
-          Timecop.freeze(last_paid_on.next_month)
+          periodic_expense = create(:periodic_expense,
+                                    start_date: Date.today.last_month,
+                                    period: 'monthly',
+                                    last_paid_on: Date.today)
+          allow(periodic_expense).to receive(:ready_to_pay?).and_return(true)
 
           expect { runner.run_for_periodic_expense(periodic_expense) }.to change { Expense.count }.by(1)
         end
@@ -18,10 +19,7 @@ describe PeriodicExpenseRunner, type: :model do
 
       context 'that is not ready to pay' do
         it 'does not create an expense' do
-          last_paid_on = Date.new(2015, 2, 1)
-          periodic_expense = create(:periodic_expense, start_date: last_paid_on.prev_month, period: 'monthly', last_paid_on: last_paid_on)
-
-          Timecop.freeze(last_paid_on.next_week)
+          periodic_expense = instance_double('PeriodicExpense', ready_to_pay?: false)
 
           expect { runner.run_for_periodic_expense(periodic_expense) }.not_to change { Expense.count }
         end
@@ -39,7 +37,7 @@ describe PeriodicExpenseRunner, type: :model do
     end
 
     context 'with periodic expenses that are ready to pay' do
-      it 'creates expenses' do
+      it 'creates expenses and updates periodic expenses' do
         today = Date.new(2015, 3, 1).next_week.beginning_of_week
         create(:periodic_expense, start_date: today - 2.months, period: 'monthly', last_paid_on: today.prev_month.beginning_of_month)
         create(:periodic_expense, start_date: today - 2.months, period: 'weekly', last_paid_on: today.prev_week)
@@ -47,16 +45,6 @@ describe PeriodicExpenseRunner, type: :model do
         Timecop.freeze(today)
 
         expect { runner.run }.to change { Expense.count }.by(2)
-      end
-
-      it 'updates those periodic expenses' do
-        today = Date.new(2015, 3, 1).next_week.beginning_of_week
-        periodic_expense1 = create(:periodic_expense, start_date: today - 2.months, period: 'monthly', last_paid_on: today.prev_month.beginning_of_month)
-        periodic_expense2 = create(:periodic_expense, start_date: today - 2.months, period: 'weekly', last_paid_on: today.prev_week)
-
-        Timecop.freeze(today)
-        runner.run
-
         expect(periodic_expense1.reload).not_to be_ready_to_pay
         expect(periodic_expense2.reload).not_to be_ready_to_pay
       end

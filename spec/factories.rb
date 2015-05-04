@@ -17,7 +17,7 @@ FactoryGirl.define do
     name 'Jantar'
     value 100
     date { DateTime.now }
-    user
+    association :user, factory: :user, strategy: :build
   end
 
   factory :periodic_expense do
@@ -25,6 +25,6 @@ FactoryGirl.define do
     amount 25
     period 'monthly'
     start_date { Date.today }
-    user
+    association :user, factory: :user, strategy: :build
   end
 end
