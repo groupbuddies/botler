@@ -70,7 +70,7 @@ describe PeriodicExpense, type: :model do
     end
   end
 
-  context '#ready_to_pay?' do
+  context '#due?' do
     context 'monthly expense' do
       context 'last paid over a month ago' do
         it 'returns true' do
@@ -80,7 +80,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.ready_to_pay?).to be true
+          expect(periodic_expense.due?).to be true
         end
       end
 
@@ -92,7 +92,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.ready_to_pay?).to be false
+          expect(periodic_expense.due?).to be false
         end
       end
     end
@@ -106,7 +106,7 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.ready_to_pay?).to be true
+          expect(periodic_expense.due?).to be true
         end
       end
 
@@ -118,8 +118,26 @@ describe PeriodicExpense, type: :model do
 
           Timecop.freeze(today)
 
-          expect(periodic_expense.ready_to_pay?).to be false
+          expect(periodic_expense.due?).to be false
         end
+      end
+    end
+  end
+
+  context '#current' do
+    context 'with active and inactive periodic expenses' do
+      it 'returns only the active periodic expenses' do
+        today = Date.new(2015, 3, 1).next_week.beginning_of_week
+        active1 = create(:periodic_expense, start_date: today - 2.months)
+        active2 = create(:periodic_expense, start_date: today.last_month, end_date: today.next_month)
+        inactive1 = create(:periodic_expense, start_date: today.next_month)
+        inactive2 = create(:periodic_expense, start_date: today - 3.months, end_date: today.last_month)
+
+        Timecop.freeze(today)
+        current = PeriodicExpense.current
+
+        expect(current).to contain_exactly(active1, active2)
+        expect(current).not_to include(inactive1, inactive2)
       end
     end
   end

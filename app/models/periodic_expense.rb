@@ -11,7 +11,7 @@ class PeriodicExpense < ActiveRecord::Base
 
   scope :current, -> { where('start_date <= :today AND (end_date IS NULL OR end_date > :today)', today: Date.today) }
 
-  def ready_to_pay?
+  def due?
     !next_pay_on.future? && (end_date.nil? || end_date > Date.today)
   end
 

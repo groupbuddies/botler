@@ -12,7 +12,7 @@ class PeriodicExpenseRunner
   end
 
   def run_for_periodic_expense(periodic_expense)
-    return unless periodic_expense.ready_to_pay?
+    return unless periodic_expense.due?
 
     periodic_expense.transaction do
       update_periodic_expense(periodic_expense)
