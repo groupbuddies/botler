@@ -2,8 +2,8 @@
   = form.label :name
   = form.text_field :name
 
-  = form.label :value
-  = form.text_field :value
+  = form.label :amount
+  = form.text_field :amount
 
   = form.label :user_id, 'User'
   = form.select :user_id, User.all.collect { |user| [ user.name, user.id ] }, { include_blank: 'None' }

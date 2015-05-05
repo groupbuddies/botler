@@ -9,7 +9,7 @@ describe ExpensesController, type: :controller do
     context 'when all fields are valid' do
       it 'redirects to expenses#index' do
         user = create(:user)
-        post :create, expense: { name: 'Jantar', value: 100, user_id: user.id }
+        post :create, expense: { name: 'Jantar', amount: 100, user_id: user.id }
 
         expect(response).to redirect_to(expenses_path)
       end
@@ -18,7 +18,7 @@ describe ExpensesController, type: :controller do
     context 'when there are invalid fields' do
       it 'does not redirect to expenses#index' do
         user = create(:user)
-        post :create, expense: { value: 100, user_id: user.id }
+        post :create, expense: { amount: 100, user_id: user.id }
 
         expect(response).not_to redirect_to(expenses_path)
       end

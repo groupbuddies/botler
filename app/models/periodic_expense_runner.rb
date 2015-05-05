@@ -32,7 +32,7 @@ class PeriodicExpenseRunner
       user: periodic_expense.user,
       periodic_expense: periodic_expense,
       date: today.to_datetime,
-      value: periodic_expense.amount
+      amount: periodic_expense.amount
     )
   end
 end

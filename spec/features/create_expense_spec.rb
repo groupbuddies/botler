@@ -12,7 +12,7 @@ RSpec.feature 'create a new expense' do
     visit new_expense_path
 
     fill_in 'Name', with: 'Jantar'
-    fill_in 'Value', with: 100
+    fill_in 'Amount', with: 100
     select user.name, from: 'User'
 
     click_on 'Create Expense'

@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505111742) do
+ActiveRecord::Schema.define(version: 20150505182522) do
 
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
-    t.float    "value"
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "periodic_expense_id"
+    t.float    "amount"
   end
 
   add_index "expenses", ["periodic_expense_id"], name: "index_expenses_on_periodic_expense_id"

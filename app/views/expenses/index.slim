@@ -8,7 +8,7 @@
     - @expenses.each do |expense|
       tr
         td.name = expense.name
-        td.value = expense.value
+        td.amount = expense.amount
         td.user = expense.user.name
 
 = link_to('Create new', new_expense_path)

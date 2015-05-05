@@ -16,10 +16,10 @@ describe Expense, type: :model do
       expect(expense).to be_valid
     end
 
-    it 'must have a value' do
-      expense = build(:expense, value: nil)
+    it 'must have an amount' do
+      expense = build(:expense, amount: nil)
 
-      expect(expense).not_to be_valid
+      expect(expense).to be_invalid
     end
   end
 end
