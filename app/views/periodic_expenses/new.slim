@@ -1,0 +1,14 @@
+= simple_form_for @periodic_expense do |form|
+  = form.input :name
+
+  = form.input :period, collection: PeriodicExpense.periods, label_method: :humanize
+
+  = form.input :amount
+
+  = form.input :start_date
+
+  = form.input :end_date
+
+  = form.association :user, collection: User.all
+
+  = form.button :submit

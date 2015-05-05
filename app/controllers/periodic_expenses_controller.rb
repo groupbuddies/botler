@@ -13,7 +13,6 @@ class PeriodicExpensesController < ApplicationController
       flash[:notice] = 'Success'
       redirect_to periodic_expenses_path
     else
-      flash.now[:error] = 'Some fields were left blank'
       render :new
     end
   end
