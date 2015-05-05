@@ -46,14 +46,12 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rubocop', require: false
-
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.2'
-
   gem 'capybara'
   gem 'capybara-webkit'
-
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.2'
+  gem 'formulaic'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
   gem 'timecop', '~> 0.7.3'
 end

@@ -25,6 +25,7 @@ FactoryGirl.define do
     amount 25
     period 'monthly'
     start_date { Date.today }
+    end_date { Date.today.next_year }
     association :user, factory: :user, strategy: :build
   end
 end
