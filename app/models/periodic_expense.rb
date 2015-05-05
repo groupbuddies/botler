@@ -2,6 +2,7 @@ class PeriodicExpense < ActiveRecord::Base
   PERIODS = { 'weekly' => 1.week, 'monthly' => 1.month }
 
   belongs_to :user
+  has_many :expenses
 
   validates :name, :user, :amount, :period, :start_date, presence: true
   validates :period, inclusion: { in: PERIODS.keys }
