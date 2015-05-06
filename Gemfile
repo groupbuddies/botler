@@ -29,10 +29,10 @@ gem 'turbolinks'
 # gem 'capistrano-rails', group: :development
 
 gem 'cancancan', '~> 1.10'
+gem 'date_validator'
 gem 'devise'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'validates_timeliness', '~> 3.0'
 gem 'whenever'
 
 group :development, :test do

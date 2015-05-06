@@ -6,9 +6,9 @@ class PeriodicExpense < ActiveRecord::Base
 
   validates :name, :user, :amount, :period, :start_date, presence: true
   validates :period, inclusion: { in: PERIODS.keys }
-  validates_date :end_date, after: :start_date, if: :end_date
-  validates_date :last_paid_on, after: :start_date, if: :last_paid_on
-  validates_date :last_paid_on, before: :end_date, if: [:last_paid_on, :end_date]
+  validates :end_date, date: { after: :start_date }, if: :end_date
+  validates :last_paid_on, date: { after: :start_date }, if: :last_paid_on
+  validates :last_paid_on, date: { before: :end_date }, if: [:last_paid_on, :end_date]
 
   scope :current, -> { where('start_date <= :today AND (end_date IS NULL OR end_date > :today)', today: Date.today) }
 
