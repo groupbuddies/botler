@@ -16,7 +16,7 @@ FactoryGirl.define do
   factory :expense do
     name 'Jantar'
     amount 100
-    date { DateTime.now }
+    paid_on { DateTime.now }
     association :user, factory: :user, strategy: :build
   end
 

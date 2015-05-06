@@ -31,7 +31,7 @@ class PeriodicExpenseRunner
       name: "#{periodic_expense.name} (#{periodic_expense.period.downcase})",
       user: periodic_expense.user,
       periodic_expense: periodic_expense,
-      date: today.to_datetime,
+      paid_on: today.to_datetime,
       amount: periodic_expense.amount
     )
   end

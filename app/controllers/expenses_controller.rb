@@ -23,6 +23,6 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:name, :amount, :user_id)
+    params.require(:expense).permit(:name, :amount, :paid_on, :user_id)
   end
 end
