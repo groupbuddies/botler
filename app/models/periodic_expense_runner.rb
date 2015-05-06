@@ -27,12 +27,6 @@ class PeriodicExpenseRunner
   end
 
   def create_expense(periodic_expense)
-    Expense.create!(
-      name: "#{periodic_expense.name} (#{periodic_expense.period.downcase})",
-      user: periodic_expense.user,
-      periodic_expense: periodic_expense,
-      paid_on: today.to_datetime,
-      amount: periodic_expense.amount
-    )
+    periodic_expense.create_expense
   end
 end

@@ -28,6 +28,16 @@ class PeriodicExpense < ActiveRecord::Base
     end
   end
 
+  def create_expense
+    Expense.create!(
+      name: "#{name} (#{period.downcase})",
+      user: user,
+      periodic_expense: self,
+      paid_on: Date.today,
+      amount: amount
+    )
+  end
+
   private
 
   def next_pay_on
