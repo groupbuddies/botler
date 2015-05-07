@@ -5,6 +5,8 @@
 
   = form.input :paid_on
 
+  = form.input :picture, as: :file
+
   = form.association :user, collection: User.all
 
   = form.button :submit
