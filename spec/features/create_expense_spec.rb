@@ -11,9 +11,15 @@ RSpec.feature 'create a new expense' do
     login
     visit new_expense_path
 
-    fill_in 'Name', with: 'Jantar'
-    fill_in 'Amount', with: 100
-    select user.name, from: 'User'
+    fill_form(:expense,
+      name: 'Jantar',
+      amount: 100,
+      paid_on: Date.today,
+      user: user.name
+    )
+
+    attach_file('expense_picture',
+      File.join(Rails.root, 'spec', 'support', 'images', 'receipt.jpg'))
 
     click_on 'Create Expense'
 
