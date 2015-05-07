@@ -1,11 +1,10 @@
-= form_for @expense do |form|
-  = form.label :name
-  = form.text_field :name
+= simple_form_for @expense do |form|
+  = form.input :name
 
-  = form.label :amount
-  = form.text_field :amount
+  = form.input :amount
 
-  = form.label :user_id, 'User'
-  = form.select :user_id, User.all.collect { |user| [ user.name, user.id ] }, { include_blank: 'None' }
+  = form.input :paid_on
 
-  = form.submit
+  = form.association :user, collection: User.all
+
+  = form.button :submit
