@@ -29,6 +29,7 @@ gem 'turbolinks'
 # gem 'capistrano-rails', group: :development
 
 gem 'cancancan', '~> 1.10'
+gem 'carrierwave'
 gem 'date_validator'
 gem 'devise'
 gem 'simple_form'

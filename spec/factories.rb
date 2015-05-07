@@ -28,4 +28,12 @@ FactoryGirl.define do
     end_date { Date.today.next_year }
     association :user, factory: :user, strategy: :build
   end
+
+  factory :receipt do
+    picture do
+      Rack::Test::UploadedFile.new(File.join(
+        Rails.root, 'spec', 'support', 'images', 'receipt.jpg'))
+    end
+    association :expense, factory: :expense, strategy: :create
+  end
 end
