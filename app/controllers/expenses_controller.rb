@@ -10,19 +10,19 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @expense = Expense.new(expense_params)
-    if @expense.save
-      flash[:notice] = 'success'
+    expense_creator = CreateExpensesWithReceipt.new(expense_params)
+    if expense_creator.create_expense_and_receipt
+      flash[:notice] = 'Success'
       redirect_to expenses_path
     else
-      flash.now[:error] = 'Some fields were left blank'
-      render :new
+      flash[:errors] = 'Some fields were left blank'
+      redirect_to new_expense_path
     end
   end
 
   private
 
   def expense_params
-    params.require(:expense).permit(:name, :amount, :paid_on, :user_id)
+    params.require(:expense).permit(:name, :amount, :paid_on, :user_id, :picture)
   end
 end
