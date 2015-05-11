@@ -11,7 +11,7 @@ class ExpensesController < ApplicationController
 
   def create
     expense_creator = CreateExpensesWithReceipt.new(expense_params)
-    if expense_creator.create_expense_and_receipt
+    if expense_creator.create
       flash[:notice] = 'Success'
       redirect_to expenses_path
     else

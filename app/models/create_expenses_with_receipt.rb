@@ -3,7 +3,7 @@ class CreateExpensesWithReceipt
     @params = expense_params
   end
 
-  def create_expense_and_receipt
+  def create
     return false unless picture_exists?
 
     Expense.transaction do
