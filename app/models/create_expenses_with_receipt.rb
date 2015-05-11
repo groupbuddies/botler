@@ -1,4 +1,6 @@
 class CreateExpensesWithReceipt
+  attr_reader :expense
+
   def initialize(expense_params)
     @params = expense_params
   end
@@ -10,7 +12,7 @@ class CreateExpensesWithReceipt
       create_expense
       create_receipt
     end
-    @expense
+    @expense.persisted?
   end
 
   private
