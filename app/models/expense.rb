@@ -3,6 +3,7 @@ class Expense < ActiveRecord::Base
   belongs_to :periodic_expense
   has_one :receipt
 
-  validates :name, :user, :amount, presence: true
+  validates :name, :user, :amount, :paid_on, presence: true
+  validates :paid_on, date: { before_or_equal_to: proc { Date.today } }
   validates_associated :receipt
 end

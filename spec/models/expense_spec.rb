@@ -21,5 +21,19 @@ describe Expense, type: :model do
 
       expect(expense).to be_invalid
     end
+
+    it 'must have a paid on date' do
+      expense = build(:expense, paid_on: nil)
+
+      expect(expense).to be_invalid
+    end
+
+    context 'paid_on is in the future' do
+      it 'is invalid' do
+        expense = build(:expense, paid_on: Date.tomorrow)
+
+        expect(expense).to be_invalid
+      end
+    end
   end
 end
