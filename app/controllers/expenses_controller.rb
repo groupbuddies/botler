@@ -15,8 +15,8 @@ class ExpensesController < ApplicationController
       flash[:notice] = 'Success'
       redirect_to expenses_path
     else
-      flash[:errors] = 'Some fields were left blank'
-      redirect_to new_expense_path
+      @expense = expense_creator.expense
+      render :new
     end
   end
 
