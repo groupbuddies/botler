@@ -7,12 +7,11 @@ class CreateExpensesWithReceipt
 
   def create
     setup
-    unless @expense.valid? && @receipt.valid?
-      @expense.errors.messages.merge!(@receipt.errors.messages)
+    unless @expense.valid?
+      merge_errors
       return false
     end
     do_saves
-    @expense.persisted?
   end
 
   private
@@ -22,10 +21,15 @@ class CreateExpensesWithReceipt
     @receipt = Receipt.new(picture: @params[:picture], expense: @expense)
   end
 
+  def merge_errors
+    @expense.errors.messages.merge!(@receipt.errors.messages)
+  end
+
   def do_saves
     Expense.transaction do
       @expense.save!
       @receipt.save!
     end
+    @expense.persisted?
   end
 end

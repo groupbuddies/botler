@@ -4,4 +4,5 @@ class Expense < ActiveRecord::Base
   has_one :receipt
 
   validates :name, :user, :amount, presence: true
+  validates_associated :receipt
 end
