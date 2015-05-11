@@ -37,7 +37,7 @@ RSpec.feature 'create a new expense' do
 
     click_on 'Create Expense'
 
-    expect(page).to have_text 'Some fields were left blank'
+    expect(page).to have_text "can't be blank"
   end
 
   scenario 'not authenticated' do

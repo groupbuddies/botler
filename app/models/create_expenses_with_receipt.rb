@@ -6,26 +6,26 @@ class CreateExpensesWithReceipt
   end
 
   def create
-    return false unless picture_exists?
-
-    Expense.transaction do
-      create_expense
-      create_receipt
+    setup
+    unless @expense.valid? && @receipt.valid?
+      @expense.errors.messages.merge!(@receipt.errors.messages)
+      return false
     end
+    do_saves
     @expense.persisted?
   end
 
   private
 
-  def picture_exists?
-    !@params[:picture].nil?
+  def setup
+    @expense = Expense.new(@params.except(:picture))
+    @receipt = Receipt.new(picture: @params[:picture], expense: @expense)
   end
 
-  def create_expense
-    @expense = Expense.create!(@params.except(:picture))
-  end
-
-  def create_receipt
-    Receipt.create!(picture: @params[:picture], expense: @expense)
+  def do_saves
+    Expense.transaction do
+      @expense.save!
+      @receipt.save!
+    end
   end
 end
