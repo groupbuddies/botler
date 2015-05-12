@@ -5,10 +5,12 @@
 
   = form.input :amount
 
+  = form.association :category, collection: @categories
+
   = form.input :start_date
 
   = form.input :end_date
 
-  = form.association :user, collection: User.all
+  = form.association :user, collection: @users
 
   = form.button :submit

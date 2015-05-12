@@ -2,9 +2,10 @@ class PeriodicExpense < ActiveRecord::Base
   PERIODS = { 'weekly' => 1.week, 'monthly' => 1.month }
 
   belongs_to :user
+  belongs_to :category
   has_many :expenses
 
-  validates :name, :user, :amount, :period, :start_date, presence: true
+  validates :name, :user, :amount, :period, :start_date, :category, presence: true
   validates :period, inclusion: { in: PERIODS.keys }
   validates :end_date, date: { after: :start_date }, if: :end_date
   validates :last_paid_on, date: { after: :start_date }, if: :last_paid_on
@@ -34,7 +35,8 @@ class PeriodicExpense < ActiveRecord::Base
       user: user,
       periodic_expense: self,
       paid_on: Date.today,
-      amount: amount
+      amount: amount,
+      category: category
     )
   end
 

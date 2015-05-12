@@ -1,10 +1,10 @@
 FactoryGirl.define do
   sequence :name do |n|
-    "person#{n}"
+    "name#{n}"
   end
 
   sequence :email do |n|
-    "person#{n}@example.com"
+    "name#{n}@example.com"
   end
 
   factory :user do
@@ -13,11 +13,16 @@ FactoryGirl.define do
     email
   end
 
+  factory :category do
+    name
+  end
+
   factory :expense do
     name 'Jantar'
     amount 100
     paid_on { DateTime.now }
     association :user, factory: :user, strategy: :build
+    association :category, factory: :category, strategy: :create
   end
 
   factory :periodic_expense do
@@ -27,6 +32,7 @@ FactoryGirl.define do
     start_date { Date.today }
     end_date { Date.today.next_year }
     association :user, factory: :user, strategy: :build
+    association :category, factory: :category, strategy: :create
   end
 
   factory :receipt do

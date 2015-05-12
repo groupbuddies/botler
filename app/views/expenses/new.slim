@@ -3,10 +3,12 @@
 
   = form.input :amount
 
+  = form.association :category, collection: @categories
+
   = form.input :paid_on
 
   = form.input :picture, as: :file
 
-  = form.association :user, collection: User.all
+  = form.association :user, collection: @users
 
   = form.button :submit

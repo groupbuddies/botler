@@ -1,0 +1,36 @@
+= @category.name
+
+- if @category.expenses.empty?
+
+  p This category has no expenses.
+
+- else
+  p Expenses
+
+  table
+    - @category.expenses.each do |expense|
+      tr
+        td.name = expense.name
+        td.amount = expense.amount
+        td.category = expense.category.name
+        td.paid_on = expense.paid_on
+        td.user = expense.user.name
+
+- if @category.periodic_expenses.empty?
+
+  p This category has no periodic expenses.
+
+- else
+  p Periodic Expenses
+
+  table
+    - @category.periodic_expenses.each do |periodic_expense|
+      tr
+        td.name = periodic_expense.name
+        td.period = periodic_expense.period
+        td.amount = periodic_expense.amount
+        td.category = periodic_expense.category.name
+        td.start_date = periodic_expense.start_date
+        td.end_date = periodic_expense.end_date
+        td.last_paid_on = periodic_expense.last_paid_on
+        td.user = periodic_expense.user.name

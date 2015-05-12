@@ -6,19 +6,20 @@ RSpec.feature 'create a new periodic expense' do
   end
 
   scenario 'with valid data' do
-    user = create(:user)
+    periodic_expense_attributes = {
+      name: 'Github',
+      period: 'Monthly',
+      amount: 25,
+      category: create(:category).name,
+      start_date: Date.today,
+      end_date: Date.today.next_year,
+      user: create(:user).name
+    }
 
     login
     visit new_periodic_expense_path
 
-    fill_form(:periodic_expense,
-      name: 'Github',
-      period: 'Monthly',
-      amount: 25,
-      start_date: Date.today,
-      end_date: Date.today.next_year,
-      user: user.name
-    )
+    fill_form(:periodic_expense, periodic_expense_attributes)
 
     click_on 'Create Periodic expense'
 

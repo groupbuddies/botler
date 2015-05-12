@@ -1,23 +1,23 @@
 require 'rails_helper'
 
-RSpec.feature 'create a new expense' do
+RSpec.feature 'Create a new expense' do
   def login
     login_as(create(:user))
   end
 
   scenario 'with valid data' do
-    user = create(:user)
+    expense_attributes = {
+      name: 'Jantar',
+      amount: 100,
+      category: create(:category).name,
+      paid_on: Date.today,
+      user: create(:user).name
+    }
 
     login
     visit new_expense_path
 
-    fill_form(:expense,
-      name: 'Jantar',
-      amount: 100,
-      paid_on: Date.today,
-      user: user.name
-    )
-
+    fill_form(:expense, expense_attributes)
     attach_file('expense_picture',
       File.join(Rails.root, 'spec', 'support', 'images', 'receipt.jpg'))
 

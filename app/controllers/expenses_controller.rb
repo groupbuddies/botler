@@ -6,10 +6,12 @@ class ExpensesController < ApplicationController
   end
 
   def new
+    setup
     @expense = Expense.new
   end
 
   def create
+    setup
     expense_creator = CreateExpensesWithReceipt.new(expense_params)
     if expense_creator.create
       flash[:notice] = 'Success'
@@ -22,7 +24,12 @@ class ExpensesController < ApplicationController
 
   private
 
+  def setup
+    @categories = Category.all
+    @users = User.all
+  end
+
   def expense_params
-    params.require(:expense).permit(:name, :amount, :paid_on, :user_id, :picture)
+    params.require(:expense).permit(:name, :amount, :category_id, :paid_on, :user_id, :picture)
   end
 end
