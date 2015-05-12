@@ -11,7 +11,7 @@ class CreateExpensesWithReceipt
       merge_errors
       return false
     end
-    do_saves
+    save
   end
 
   private
@@ -25,7 +25,7 @@ class CreateExpensesWithReceipt
     @expense.errors.messages.merge!(@receipt.errors.messages)
   end
 
-  def do_saves
+  def save
     Expense.transaction do
       @expense.save!
       @receipt.save!
