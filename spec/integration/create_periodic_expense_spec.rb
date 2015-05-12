@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature 'create a new periodic expense' do
+  def login
+    login_as(create(:user))
+  end
+
   scenario 'with valid data' do
     user = create(:user)
 
+    login
     visit new_periodic_expense_path
 
     fill_form(:periodic_expense,
@@ -21,10 +26,17 @@ RSpec.feature 'create a new periodic expense' do
   end
 
   scenario 'with invalid data' do
+    login
     visit new_periodic_expense_path
 
     click_on 'Create Periodic expense'
 
     expect(page).to have_text "can't be blank"
+  end
+
+  scenario 'not authenticated' do
+    visit new_expense_path
+
+    expect(page).to have_text 'You are not authorized to access this page.'
   end
 end

@@ -1,4 +1,6 @@
 class PeriodicExpensesController < ApplicationController
+  authorize_resource
+
   def index
     @periodic_expenses = PeriodicExpense.all
   end

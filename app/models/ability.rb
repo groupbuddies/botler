@@ -10,6 +10,7 @@ class Ability
 
   def registered_user
     can :manage, Expense
+    can :manage, PeriodicExpense
   end
 
   private
