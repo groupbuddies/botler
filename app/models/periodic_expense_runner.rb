@@ -16,7 +16,7 @@ class PeriodicExpenseRunner
 
     periodic_expense.transaction do
       update_periodic_expense(periodic_expense)
-      create_expense(periodic_expense)
+      create_reminder(periodic_expense)
     end
   end
 
@@ -26,7 +26,7 @@ class PeriodicExpenseRunner
     periodic_expense.update! last_paid_on: periodic_expense.at_beginning_of_period(today)
   end
 
-  def create_expense(periodic_expense)
-    periodic_expense.create_expense
+  def create_reminder(periodic_expense)
+    periodic_expense.create_reminder
   end
 end
