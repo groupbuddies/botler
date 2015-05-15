@@ -41,7 +41,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     User.where(email: data['email']).first_or_create do |user|
       user.name = data['name']
       user.email = data['email']
-      user.name = data['name']
       user.password = Devise.friendly_token[0, 20]
     end
   end
