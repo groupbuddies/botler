@@ -28,13 +28,13 @@ class PeriodicExpense < ActiveRecord::Base
     end
   end
 
-  def create_expense
-    Expense.create!(
-      name: "#{name} (#{period.downcase})",
+  def create_reminder
+    due_on = next_pay_on
+    Reminder.create!(
+      message: "#{name} is due #{due_on}.",
+      due_on: due_on,
       user: user,
-      periodic_expense: self,
-      paid_on: Date.today,
-      amount: amount
+      periodic_expense: self
     )
   end
 

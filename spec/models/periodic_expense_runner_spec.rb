@@ -6,19 +6,19 @@ describe PeriodicExpenseRunner, type: :model do
   context '#run_for_periodic_expense' do
     context 'with a periodic expense' do
       context 'that is ready to pay' do
-        it 'creates an expense' do
+        it 'creates a reminder' do
           periodic_expense = create(:periodic_expense, start_date: Date.today.last_month, last_paid_on: Date.today)
           allow(periodic_expense).to receive(:due?).and_return(true)
 
-          expect { runner.run_for_periodic_expense(periodic_expense) }.to change { Expense.count }.by(1)
+          expect { runner.run_for_periodic_expense(periodic_expense) }.to change { Reminder.count }.by(1)
         end
       end
 
       context 'that is not ready to pay' do
-        it 'does not create an expense' do
+        it 'does not create a reminder' do
           periodic_expense = instance_double('PeriodicExpense', due?: false)
 
-          expect { runner.run_for_periodic_expense(periodic_expense) }.not_to change { Expense.count }
+          expect { runner.run_for_periodic_expense(periodic_expense) }.not_to change { Reminder.count }
         end
       end
     end
@@ -36,10 +36,10 @@ describe PeriodicExpenseRunner, type: :model do
     end
 
     context 'with no periodic expenses' do
-      it 'does not create expenses' do
+      it 'does not create reminders' do
         runner.run
 
-        expect(Expense.count).to eq 0
+        expect(Reminder.count).to eq 0
       end
     end
   end

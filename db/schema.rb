@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507140025) do
+ActiveRecord::Schema.define(version: 20150515093735) do
 
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(version: 20150507140025) do
     t.integer  "periodic_expense_id"
     t.float    "amount"
     t.date     "paid_on"
+    t.integer  "reminder_id"
   end
 
   add_index "expenses", ["periodic_expense_id"], name: "index_expenses_on_periodic_expense_id"
+  add_index "expenses", ["reminder_id"], name: "index_expenses_on_reminder_id"
 
   create_table "periodic_expenses", force: :cascade do |t|
     t.string   "name"
@@ -41,6 +43,16 @@ ActiveRecord::Schema.define(version: 20150507140025) do
     t.string  "picture",    null: false
     t.integer "expense_id", null: false
   end
+
+  create_table "reminders", force: :cascade do |t|
+    t.string  "message"
+    t.integer "user_id"
+    t.date    "due_on"
+    t.integer "periodic_expense_id"
+  end
+
+  add_index "reminders", ["periodic_expense_id"], name: "index_reminders_on_periodic_expense_id"
+  add_index "reminders", ["user_id"], name: "index_reminders_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
