@@ -25,7 +25,7 @@ class ExpensesController < ApplicationController
   private
 
   def setup
-    @categories = Category.all
+    @categories = Category.subcategories
     @users = User.all
   end
 

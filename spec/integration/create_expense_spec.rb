@@ -9,7 +9,7 @@ RSpec.feature 'Create a new expense' do
     expense_attributes = {
       name: 'Jantar',
       amount: 100,
-      category: create(:category).name,
+      category: create(:subcategory).name,
       paid_on: Date.today,
       user: create(:user).name
     }

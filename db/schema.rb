@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513151204) do
+ActiveRecord::Schema.define(version: 20150515134224) do
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "category_id"
   end
 
+  add_index "categories", ["category_id"], name: "index_categories_on_category_id"
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true
 
   create_table "expenses", force: :cascade do |t|

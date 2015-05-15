@@ -17,6 +17,11 @@ FactoryGirl.define do
     name
   end
 
+  factory :subcategory, class: Category do
+    name
+    association :parent, factory: :category, strategy: :create
+  end
+
   factory :expense do
     name 'Jantar'
     amount 100

@@ -10,7 +10,7 @@ RSpec.feature 'create a new periodic expense' do
       name: 'Github',
       period: 'Monthly',
       amount: 25,
-      category: create(:category).name,
+      category: create(:subcategory).name,
       start_date: Date.today,
       end_date: Date.today.next_year,
       user: create(:user).name
