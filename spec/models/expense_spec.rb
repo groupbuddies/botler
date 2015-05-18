@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Expense, type: :model do
-  context '#name' do
-    it 'has a name' do
-      expense = build(:expense, name: 'Jantar')
+  context '#description' do
+    it 'has a description' do
+      expense = build(:expense, description: 'Jantar')
 
-      expect(expense.name).to eq 'Jantar'
+      expect(expense.description).to eq 'Jantar'
     end
   end
 

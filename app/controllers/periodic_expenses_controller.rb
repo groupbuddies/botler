@@ -25,11 +25,12 @@ class PeriodicExpensesController < ApplicationController
 
   def setup
     @categories = Category.subcategories
-    @users = User.all
+    @periods = PeriodicExpense.periods
   end
 
   def periodic_expense_params
-    params.require(:periodic_expense).permit(:name, :amount, :period,
-      :start_date, :end_date, :user_id, :category_id)
+    params.require(:periodic_expense).permit(:description, :amount, :category_id,
+      :period, :supplier, :vat, :cost_center, :payment_method,
+      :start_date, :end_date).merge(user_id: current_user.id)
   end
 end

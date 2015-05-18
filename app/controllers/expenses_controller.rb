@@ -6,17 +6,17 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    setup
+    @categories = Category.subcategories
     @expense = Expense.new
   end
 
   def create
-    setup
     expense_creator = CreateExpensesWithReceipt.new(expense_params)
     if expense_creator.create
       flash[:notice] = 'Success'
       redirect_to expenses_path
     else
+      @categories = Category.subcategories
       @expense = expense_creator.expense
       render :new
     end
@@ -24,12 +24,9 @@ class ExpensesController < ApplicationController
 
   private
 
-  def setup
-    @categories = Category.subcategories
-    @users = User.all
-  end
-
   def expense_params
-    params.require(:expense).permit(:name, :amount, :category_id, :paid_on, :user_id, :picture)
+    params.require(:expense).permit(:description, :amount,
+      :category_id, :paid_on, :supplier, :vat, :cost_center,
+      :payment_method, :picture).merge(user_id: current_user.id)
   end
 end

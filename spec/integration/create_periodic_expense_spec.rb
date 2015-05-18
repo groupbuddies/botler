@@ -7,13 +7,12 @@ RSpec.feature 'create a new periodic expense' do
 
   scenario 'with valid data' do
     periodic_expense_attributes = {
-      name: 'Github',
+      description: 'Github',
       period: 'Monthly',
       amount: 25,
       category: create(:subcategory).name,
       start_date: Date.today,
-      end_date: Date.today.next_year,
-      user: create(:user).name
+      end_date: Date.today.next_year
     }
 
     login

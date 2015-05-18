@@ -13,8 +13,8 @@ RSpec.feature 'list all expenses' do
   end
 
   scenario 'there are expenses' do
-    create(:expense, name: 'Almoço')
-    create(:expense, name: 'Jantar')
+    create(:expense, description: 'Almoço')
+    create(:expense, description: 'Jantar')
 
     login
     visit root_path

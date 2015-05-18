@@ -8,7 +8,7 @@ RSpec.feature 'List expenses in the API' do
 
     visit api_expenses_path
 
-    expect(map_json_attribute(json_response, :name)).to eq expenses.map(&:name)
+    expect(map_json_attribute(json_response, :description)).to eq expenses.map(&:description)
     expect(map_json_attribute(json_response, :user_id)).to be_empty
   end
 

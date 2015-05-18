@@ -7,11 +7,10 @@ RSpec.feature 'Create a new expense' do
 
   scenario 'with valid data' do
     expense_attributes = {
-      name: 'Jantar',
+      description: 'Jantar',
       amount: 100,
       category: create(:subcategory).name,
-      paid_on: Date.today,
-      user: create(:user).name
+      paid_on: Date.today
     }
 
     login
@@ -27,13 +26,10 @@ RSpec.feature 'Create a new expense' do
   end
 
   scenario 'with invalid data' do
-    user = create(:user)
-
     login
     visit new_expense_path
 
-    fill_in 'Name', with: 'Jantar'
-    select user.name, from: 'User'
+    fill_in 'Description', with: 'Jantar'
 
     click_on 'Create Expense'
 

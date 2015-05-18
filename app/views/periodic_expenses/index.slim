@@ -5,15 +5,36 @@
 - else
 
   table
-    - @periodic_expenses.each do |periodic_expense|
+    thead
       tr
-        td.name = periodic_expense.name
-        td.period = periodic_expense.period
-        td.amount = periodic_expense.amount
-        td.category = periodic_expense.category.name
-        td.start_date = periodic_expense.start_date
-        td.end_date = periodic_expense.end_date
-        td.last_paid_on = periodic_expense.last_paid_on
-        td.user = periodic_expense.user.name
+        th Start Date
+        th End Date
+        th Period
+        th Last Payment
+        th Category
+        th Sub-Category
+        th Description
+        th Supplier
+        th Amount
+        th VAT
+        th Cost Center
+        th Payment Method
+        th User
+    tbody
+      - @periodic_expenses.each do |periodic_expense|
+        tr
+          td.start_date = periodic_expense.start_date
+          td.end_date = periodic_expense.end_date
+          td.period = periodic_expense.period
+          td.last_paid_on = periodic_expense.last_paid_on
+          td.category = periodic_expense.category.parent.name
+          td.sub_category = periodic_expense.category.name
+          td.description = periodic_expense.description
+          td.supplier = periodic_expense.supplier
+          td.amount = periodic_expense.amount
+          td.vat = periodic_expense.vat
+          td.cost_center = periodic_expense.cost_center
+          td.payment_method = periodic_expense.payment_method
+          td.user = periodic_expense.user.name
 
 = link_to('Create new', new_periodic_expense_path)

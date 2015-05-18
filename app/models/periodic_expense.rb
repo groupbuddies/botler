@@ -5,7 +5,7 @@ class PeriodicExpense < ActiveRecord::Base
   belongs_to :category
   has_many :expenses
 
-  validates :name, :user, :amount, :period, :start_date, :category, presence: true
+  validates :description, :user, :amount, :period, :start_date, :category, presence: true
   validates :period, inclusion: { in: PERIODS.keys }
   validates :end_date, date: { after: :start_date }, if: :end_date
   validates :last_paid_on, date: { after: :start_date }, if: :last_paid_on
@@ -31,7 +31,7 @@ class PeriodicExpense < ActiveRecord::Base
 
   def create_expense
     Expense.create!(
-      name: "#{name} (#{period.downcase})",
+      description: "#{description} (#{period.downcase})",
       user: user,
       periodic_expense: self,
       paid_on: Date.today,

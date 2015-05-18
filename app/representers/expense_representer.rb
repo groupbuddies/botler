@@ -2,7 +2,7 @@ module ExpenseRepresenter
   include Roar::JSON
   include Roar::Hypermedia
 
-  property :name
+  property :description
   property :amount
 
   link :self do

@@ -23,21 +23,21 @@ FactoryGirl.define do
   end
 
   factory :expense do
-    name 'Jantar'
+    description 'Jantar'
     amount 100
     paid_on { DateTime.now }
     association :user, factory: :user, strategy: :build
-    association :category, factory: :category, strategy: :create
+    association :category, factory: :subcategory, strategy: :create
   end
 
   factory :periodic_expense do
-    name 'Github'
+    description 'Github'
     amount 25
     period 'monthly'
     start_date { Date.today }
     end_date { Date.today.next_year }
     association :user, factory: :user, strategy: :build
-    association :category, factory: :category, strategy: :create
+    association :category, factory: :subcategory, strategy: :create
   end
 
   factory :receipt do
