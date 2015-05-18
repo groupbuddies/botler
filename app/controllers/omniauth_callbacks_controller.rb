@@ -19,7 +19,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def handle_failure
-    session['devise.headquarters_data'] = request.env['omniauth.auth']
     redirect_to root_url
   end
 
