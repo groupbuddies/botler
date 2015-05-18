@@ -6,6 +6,6 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  scope :supercategories, -> { where(parent: nil) }
+  scope :main, -> { where(parent: nil) }
   scope :subcategories, -> { where.not(parent: nil) }
 end

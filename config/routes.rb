@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :periodic_expenses, only: [:index, :new, :create]
 
   namespace :api, defaults: { format: :json }, contraints: { format: :json } do
+    resources :categories, only: [:index, :show]
     resources :expenses, only: [:index, :show]
   end
+  
   root to: "expenses#index"
 end
