@@ -1,9 +1,16 @@
-- if user_signed_in?
+nav.navbar.navbar-default.navbar-fixed-top
 
-  = button_to 'Log out', destroy_user_session_path, method: 'delete'
+  .container-fluid
 
-- else
+    = link_to 'Botler', root_path, class: 'navbar-brand' 
 
-  = link_to 'Sign up', new_user_registration_path
+    ul.nav.navbar-nav.navbar-right
 
-  = link_to 'Sign in', new_user_session_path
+      - if user_signed_in?
+
+        li = button_to 'Log out', destroy_user_session_path, method: 'delete', class: 'btn btn-link navbar-btn'
+
+      - else
+
+        li = link_to 'Sign up', new_user_registration_path, class: 'btn btn-link navbar-btn'
+        li = link_to 'Sign in', new_user_session_path, class: 'btn btn-link navbar-btn'

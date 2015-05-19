@@ -10,6 +10,12 @@ html
 
   = render '/shared/navbar'
 
-  = render '/shared/flash'
+  #page.container-fluid
 
-  == yield
+    .row
+
+      .col-md-12
+
+        = render '/shared/flash'
+
+        == yield
