@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
 
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'cancancan', '~> 1.10'
 gem 'carrierwave'
 gem 'coffee-rails', '~> 4.1.0'
