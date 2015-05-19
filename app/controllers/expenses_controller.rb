@@ -22,6 +22,22 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def edit
+    @categories = Category.subcategories
+    @expense = Expense.find(params[:id])
+  end
+
+  def update
+    @expense = Expense.find(params[:id])
+    expense_creator = CreateExpensesWithReceipt.new(expense_params)
+    if expense_creator.update(@expense)
+      redirect_to expenses_path
+    else
+      @categories = Category.subcategories
+      render :edit
+    end
+  end
+
   private
 
   def categories

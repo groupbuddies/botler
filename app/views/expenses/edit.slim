@@ -1,0 +1,20 @@
+= simple_form_for @expense do |form|
+  = form.input :paid_on
+
+  = form.association :category, collection: @categories
+
+  = form.input :description
+
+  = form.input :supplier
+
+  = form.input :amount
+
+  = form.input :vat
+
+  = form.input :cost_center
+
+  = form.input :payment_method
+
+  = form.input :picture, as: :file
+
+  = form.button :submit
