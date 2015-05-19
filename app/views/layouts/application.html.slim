@@ -8,14 +8,15 @@ html
 
   body
 
-  = render '/shared/navbar'
+    = render '/shared/navbar'
 
-  #page.container-fluid
+    #page.container
+      .row
+        .col-md-12
 
-    .row
+          = render '/shared/flash'
 
-      .col-md-12
+          == yield
 
-        = render '/shared/flash'
-
-        == yield
+    <script src="//use.typekit.net/myc0tnz.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script> 

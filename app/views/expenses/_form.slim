@@ -1,0 +1,61 @@
+javascript:
+  $(function() {
+    window.ExpensesForm.initialize();
+  });
+
+.expenses-form
+  = simple_form_for @expense do |form|
+    .form-inputs
+      .form-group
+        .row
+          .col-md-2
+            = form.input :paid_on
+
+      .form-group
+        .row
+          .col-md-12
+            = form.input :description
+
+      .form-group
+        .row
+          .col-md-4
+            = form.input :amount, wrapper: :vertical_input_group do
+              span.input-group-addon €
+              = form.input_field :amount, id: 'amount', class: 'form-control'
+
+          .col-md-4
+            = form.input :vat, wrapper: :vertical_input_group do
+              span.input-group-addon %
+              = form.input_field :vat, id: 'vat', class: 'form-control'
+
+          .col-md-4
+            .form-group
+              label.control-label Amount w/ VAT
+              #computed-amount
+                p.form-control-static €0.00
+
+      .form-group
+        .row
+          .col-md-12
+            = form.input :picture, as: :file
+
+      .form-group
+        .row
+          .col-md-6
+            = form.association :category, collection: @categories
+
+      .form-group
+        .row
+          .col-md-12
+            = form.input :supplier
+
+      .form-group
+        .row
+          .col-md-6
+            = form.input :cost_center
+
+          .col-md-6
+            = form.input :payment_method
+
+    .form-actions
+      = form.button :submit
