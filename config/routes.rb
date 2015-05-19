@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+
   resources :categories, only: [:index, :show]
   resources :expenses, only: [:index, :new, :create]
   resources :periodic_expenses, only: [:index, :new, :create]
@@ -8,6 +9,6 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :show]
     resources :expenses, only: [:index, :show]
   end
-  
+
   root to: "expenses#index"
 end
