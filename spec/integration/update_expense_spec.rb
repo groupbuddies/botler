@@ -31,7 +31,7 @@ RSpec.feature 'Update expense' do
     login
     visit edit_expense_path(expense)
 
-    fill_in 'Description', with: 'Jantar'
+    fill_in 'Description', with: ''
 
     click_on 'Update Expense'
 

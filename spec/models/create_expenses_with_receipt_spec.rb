@@ -58,24 +58,4 @@ describe CreateExpensesWithReceipt, type: :model do
       end
     end
   end
-
-  context '#update' do
-    context 'with valid params' do
-      it 'returns true' do
-        expense = create(:expense)
-        creator = CreateExpensesWithReceipt.new(valid_params)
-
-        expect(creator.update(expense)).to be true
-      end
-
-      it 'updates the expense' do
-        expense = create(:expense, description: 'Old')
-        creator = CreateExpensesWithReceipt.new(valid_params.merge(description: 'New'))
-
-        creator.update(expense)
-
-        expect(expense.reload.description).to eq 'New'
-      end
-    end
-  end
 end

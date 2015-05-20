@@ -29,8 +29,8 @@ class ExpensesController < ApplicationController
 
   def update
     @expense = Expense.find(params[:id])
-    expense_creator = CreateExpensesWithReceipt.new(expense_params)
-    if expense_creator.update(@expense)
+    expense_updater = UpdateExpenseAndReceipt.new(@expense)
+    if expense_updater.update(expense_params)
       redirect_to expenses_path
     else
       @categories = Category.subcategories
