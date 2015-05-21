@@ -17,3 +17,4 @@
 //= require bootstrap-sprockets
 
 //= require expenses/form
+//= require categories/select

@@ -7,10 +7,10 @@ RSpec.feature 'Create a new expense' do
 
   scenario 'with valid data' do
     expense_attributes = {
-      description: 'Jantar',
-      amount: 100,
-      category: create(:subcategory).name,
-      paid_on: Date.today
+      'Description' => 'Jantar',
+      'Amount' => 100,
+      'Sub-category' => create(:subcategory).name,
+      'Paid on' => Date.today
     }
 
     login

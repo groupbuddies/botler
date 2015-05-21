@@ -21,12 +21,12 @@ javascript:
           .col-md-4
             = form.input :amount, wrapper: :vertical_input_group do
               span.input-group-addon €
-              = form.input_field :amount, id: 'amount', class: 'form-control'
+              = form.input_field :amount, class: 'form-control'
 
           .col-md-4
             = form.input :vat, wrapper: :vertical_input_group do
               span.input-group-addon %
-              = form.input_field :vat, id: 'vat', class: 'form-control'
+              = form.input_field :vat, class: 'form-control'
 
           .col-md-4
             .form-group
@@ -42,7 +42,16 @@ javascript:
       .form-group
         .row
           .col-md-6
-            = form.association :category, collection: @categories
+            .select.required
+              label.select.required.control-label for='main_category'
+                abbr title='required' *
+                |  Category
+              select#main_category.select.required.form-control
+                option value=''
+                = options_for_select @categories
+
+          .col-md-6
+            = form.association :category, label: 'Sub-category', collection: []
 
       .form-group
         .row

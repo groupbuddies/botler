@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @categories = Category.subcategories
+    @categories = categories
     @expense = Expense.new
   end
 
@@ -16,13 +16,17 @@ class ExpensesController < ApplicationController
       flash[:notice] = 'Success'
       redirect_to expenses_path
     else
-      @categories = Category.subcategories
+      @categories = categories
       @expense = expense_creator.expense
       render :new
     end
   end
 
   private
+
+  def categories
+    Category.main.map { |category| [category.name, category.id] }
+  end
 
   def expense_params
     params.require(:expense).permit(:description, :amount,
