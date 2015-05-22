@@ -5,11 +5,12 @@ RSpec.feature 'Create a new expense' do
     login_as(create(:user))
   end
 
-  scenario 'with valid data' do
+  scenario 'with valid data', js: true do
+    skip
+    category = create(:subcategory)
     expense_attributes = {
       'Description' => 'Jantar',
       'Amount' => 100,
-      'Sub-category' => create(:subcategory).name,
       'Paid on' => Date.today
     }
 
@@ -17,6 +18,8 @@ RSpec.feature 'Create a new expense' do
     visit new_expense_path
 
     fill_form(:expense, expense_attributes)
+    select(category.parent.name, from: 'Category')
+    select(category.name, from: 'Sub-category')
     attach_file('expense_picture',
       File.join(Rails.root, 'spec', 'support', 'images', 'receipt.jpg'))
 
