@@ -10,7 +10,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to root_url
     end
   end
-  
+
   private
 
   def handle_success(user)
