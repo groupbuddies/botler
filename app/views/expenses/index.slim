@@ -4,31 +4,35 @@
 
 - else
 
-  table
+
+
+  table.table.expenses-table
     thead
       tr
-        th Payment Date
+        th Date
         th Category
         th Sub-Category
         th Description
         th Supplier
-        th Amount
+        th Amount w/o VAT
         th VAT
+        th Amount w/ VAT
         th Cost Center
         th Payment Method
         th User
     tbody
       - @expenses.each do |expense|
         tr
-          td.paid_on = expense.paid_on
-          td.category = expense.category.parent.name
-          td.sub_category = expense.category.name
-          td.description = expense.description
-          td.supplier = expense.supplier
-          td.amount = expense.amount
-          td.vat = expense.vat
-          td.cost_center = expense.cost_center
-          td.payment_method = expense.payment_method
-          td.user = expense.user.name
+          td = expense.paid_on
+          td = expense.category.parent.name
+          td = expense.category.name
+          td = expense.description
+          td = expense.supplier
+          td = expense.format_amount
+          td = expense.format_vat
+          td = expense.format_amount_w_vat
+          td = expense.cost_center
+          td = expense.payment_method
+          td = expense.user.name
 
-= link_to('Create new', new_expense_path)
+= link_to 'Create new', new_expense_path, class: 'btn btn-default'

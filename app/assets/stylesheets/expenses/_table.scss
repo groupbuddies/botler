@@ -1,0 +1,44 @@
+$header-background-color: #5fcac6;
+$header-border: 1px solid #54aca9;
+$header-font-color: #ffffff;
+$body-stripe-color: #F8F8F8;
+$hover-background-color: #dcdcdc;
+
+.expenses-table {
+  thead,
+  tbody {
+    > tr {
+      > th,
+      > td {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+  // Header
+  thead > tr {
+    background-color: $header-background-color;
+    color: $header-font-color;
+    > th {
+      border: $header-border;
+      text-transform: uppercase;
+    }
+  }
+  thead:first-child > tr:first-child > th {
+    border-top: $header-border;
+  }
+  // Body
+  tbody {
+    > tr > td {
+      border-top: none;
+    }
+    > tr:nth-of-type(2n+1) {
+      background-color: $body-stripe-color;
+    }
+    tr:hover,
+    td:hover {
+      background-color: $hover-background-color;
+    }
+  }
+}
+
