@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json }, contraints: { format: :json } do
     resources :categories, only: [:index, :show]
-    resources :expenses, only: [:index, :show]
+    resources :expenses, only: [:index, :show, :create]
   end
   
   root to: "expenses#index"
