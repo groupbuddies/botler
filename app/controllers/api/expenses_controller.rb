@@ -13,11 +13,11 @@ class API::ExpensesController < API::BaseController
   end
 
   def create
-    expense = Expense.new(expense_params)
-    if expense.save
-      respond_with expense, status: 201
+    creator = API::ExpenseCreator.new(Category)
+    if creator.create(expense_params)
+      respond_with creator.expense, status: 201
     else
-      render json: { errors: expense.errors.full_messages }, status: 422
+      render json: { errors: creator.errors }, status: 422
     end
   end
 
@@ -25,6 +25,6 @@ class API::ExpensesController < API::BaseController
 
   def expense_params
     params.require(:expense).permit(:paid_on, :subcategory, :description,
-      :supplier, :amount, :vat, :cost_center, :payment_method);
+      :supplier, :amount, :vat, :cost_center, :payment_method, :user_id);
   end
 end
