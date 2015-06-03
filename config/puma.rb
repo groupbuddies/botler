@@ -5,8 +5,13 @@ preload_app!
 
 rackup DefaultRackup
 
-port ENV['PORT'] || 3000
 environment ENV['RAILS_ENV'] || 'development'
+
+if %w(production staging).include?(ENV['RAILS_ENV'])
+  bind "unix:///var/www/#{ENV['APP_NAME']}/shared/sockets/puma.sock"
+else
+  port ENV['PORT'] || 3000
+end
 
 on_worker_boot do
   # worker specific setup
