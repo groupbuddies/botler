@@ -37,3 +37,10 @@ group :test do
   gem 'rubocop', require: false
   gem 'timecop', '~> 0.7.3'
 end
+
+group :deploy do
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+end
