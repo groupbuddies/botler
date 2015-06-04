@@ -11,7 +11,7 @@ set :format, :pretty
 set :log_level, :debug
 set :pty, true
 
-set :rvm_ruby_version, '2.2.0'
+set :rvm_ruby_version, '2.2'
 
 set :linked_files, %w{.env}
 set :linked_dirs, %w{log public/system public/uploads}
