@@ -1,27 +1,29 @@
 #!/bin/bash
 
 # Updating
-sudo apt-get --yes update
+apt-get --yes update
 
 # Install curl
-sudo apt-get --yes install curl
+apt-get --yes install curl
 
 # Install git
-sudo apt-get --yes install git
+apt-get --yes install git
 
 # Install qt, needed by capybara gem
-sudo apt-get --yes install libqt4-dev
+apt-get --yes install libqt4-dev
 
 # PostgreSQL
 ## Update locale
-sudo locale-gen en_US.UTF-8
-sudo /usr/sbin/update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-sudo sed 's/en_US/en_US.UTF-8/' < /etc/default/locale
+locale-gen en_US.UTF-8
+/usr/sbin/update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+sed -i 's/en_US/en_US.UTF-8/' /etc/default/locale
 ## Install postgresql
-sudo apt-get --yes install postgresql libpq-dev
+apt-get --yes install postgresql libpq-dev
 ## Create user
 sudo -u postgres createuser -s -d botler
 sudo -u postgres createdb botler
+sed -i 's/# TYPE  DATABASE        USER            ADDRESS                 METHOD/# TYPE  DATABASE        USER            ADDRESS                 METHOD\nlocal   botler          botler                                  trust/' /etc/postgresql/9.1/main/pg_hba.conf
+service postgresql restart
 
 # Ruby
 ## Install rvm
@@ -36,8 +38,8 @@ rvm use 2.2 --default
 gem install bundler
 
 # Install nodejs
-sudo apt-get --yes install nodejs
+apt-get --yes install nodejs
 
 # Install nginx
-sudo apt-get --yes install nginx
+apt-get --yes install nginx
 
