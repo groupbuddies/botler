@@ -26,5 +26,5 @@ test:
 
 production:
   <<: *default
-  database: db/production
-  username: <%= ENV["DATABASE_USER"] %>
+  database: botler
+  username: botler
