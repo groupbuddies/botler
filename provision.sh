@@ -20,7 +20,8 @@ sudo sed 's/en_US/en_US.UTF-8/' < /etc/default/locale
 ## Install postgresql
 sudo apt-get --yes install postgresql libpq-dev
 ## Create user
-sudo -u postgres createuser -s -d vagrant
+sudo -u postgres createuser -s -d botler
+sudo -u postgres createdb botler
 
 # Ruby
 ## Install rvm
